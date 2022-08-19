@@ -1,5 +1,6 @@
 import React, { Suspense, useState } from 'react';
 import { useLazyModuleFederation } from 'use-lazy-module-federation';
+import useInterval from 'app2/useInterval';
 
 const App = () => {
   const { Component: RemoteComponent, errorLoading } = useLazyModuleFederation({
@@ -8,11 +9,6 @@ const App = () => {
     module: './App',
   });
 
-  const { Component: useInterval, errorLoading2 } = useLazyModuleFederation({
-    url: 'http://localhost:3002/remoteEntry.js',
-    scope: 'app2',
-    module: './useInterval',
-  });
   const [showApp2, setShowApp2] = useState(false);
 
   const [counter, setCounter] = useState(0);
@@ -33,7 +29,7 @@ const App = () => {
       >
         <h1>App1</h1>
         <button onClick={() => setShowApp2((prevState) => !prevState)}>
-          {showApp2 ? 'hidde App2' : 'show App2'}
+          {showApp2 ? 'hidde App2' : 'show App2'} {counter}
         </button>
       </div>
       {showApp2 && (

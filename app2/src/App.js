@@ -1,6 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
+import useInterval from './useInterval';
 
 const App = ({ title }) => {
+  const [counter, setCounter] = useState(0);
+
+  useInterval(() => {
+    setCounter(counter + 1);
+  }, 1000);
+
   return (
     <div
       style={{
@@ -11,6 +18,7 @@ const App = ({ title }) => {
       }}
     >
       <h1>{title}</h1>
+      <h2>{counter}</h2>
     </div>
   );
 };
